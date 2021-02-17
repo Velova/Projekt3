@@ -11,17 +11,18 @@ let gameBoard = [
 
 let playerturn = 1; 
 let whiteturn = "White's turn";
-let redturn = "Red's turn";
+let blackturn = "Black's turn";
+let x = false;
 
 function Playerturn(playerturn)
 {
  if(playerturn % 2 == 0)
  {
-   document.write(redturn);
+   document.getElementById("playerturn").innerHTML = whiteturn;
  }
  else
  {
-  document.getElementById("playerturn").innerHTML = "YEP"
+  document.getElementById("playerturn").innerHTML = blackturn;
  }
  playerturn++; 
 }
@@ -31,7 +32,22 @@ function Piececheck()
   
 }
 
-document.getElementsByClassName(square).onclick = Piececheck();
+function test()
+{
+  console.log("testfunktion");
+  x = true;
+  //document.getElementById("test").style.backgroundColor = "red";
+}
 
-document.getElementsByClassName("square").innerHTML.onclick = "BLYAT"
+if(x == true)
+{
+  console.log("if");
+  document.getElementById("test").style.backgroundColor = "red";
+}
+
+//document.getElementsByClassName(square).onclick = Piececheck();
+
+//document.getElementsByClassName("square").innerHTML.onclick = "BLYAT"
+
+//document.getElementsByid("test").innerHTML = console.log("HMm");
 
