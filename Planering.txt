@@ -1,0 +1,13 @@
+Checkers rule notes: 
+8x8(64 square board)
+12 pieces each
+pieces can only move diagonally forward
+pieces can capture pieces diagonally forward oneself by moving behind them. 
+
+Things to make the game work.
+1.  Somehow connect gameBoard with css squares
+2.  Register clicks on pieces and check for diagonal enemy pieces
+3.  Make the piece a king after reaching the end
+4.  Make the king pieces able to move diagonally forwards and backwards
+5.  Display whose turn it is
+6. 
