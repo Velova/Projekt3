@@ -12,16 +12,20 @@
 <h1>Dam</h1>
     </header>
     <main>
+        <div class="turns">
+            <div class="whiteturn" id = "whiteturn">White's turn</div>
+            <div class="blackturn" id = "blackturn">Black's turn</div>
+        </div>
         <div class="gameBoard"> 
            <div class="row1 row">
-               <div class="square-1-1 whitesquare square"><div id="test" onclick = "test()" class="whitechecker"></div></div>
-               <div class="square-1-2 blacksquare square"></div>
+               <div class="square-1-1 whitesquare square"></div>
+               <div class="square-1-2 blacksquare square"><div id="1" onclick = "hovered()" class="whitechecker test"></div></div>
                <div class="square-1-3 whitesquare square"></div>
-               <div class="square-1-4 blacksquare square"></div>
+               <div class="square-1-4 blacksquare square"><div id="2" onclick = "hovered()" class="whitechecker test"></div></div>
                <div class="square-1-5 whitesquare square"></div>
-               <div class="square-1-6 blacksquare square"></div>
+               <div class="square-1-6 blacksquare square"><div id="3" onclick = "hovered()" class="whitechecker test"></div></div>
                <div class="square-1-7 whitesquare square"></div>
-               <div class="square-1-8 blacksquare square"></div>
+               <div class="square-1-8 blacksquare square"><div id="4" onclick = "hovered()" class="whitechecker test"></div></div>
            </div>
            <div class="row2 row">
             <div class="square-2-1 blacksquare square"></div>
@@ -94,7 +98,7 @@
             <div class="square-8-8 whitesquare square"></div>
            </div>
         </div>
-        <button id="playerturn" onclick = "Playerturn()">Knapp</button>
+        <button id="playerturn" onclick = "colourtest()">Knapp</button>
     </main>
     <footer>
         Footer
