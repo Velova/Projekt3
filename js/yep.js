@@ -9,15 +9,39 @@ let gameBoard = [
     [21, 0, 22, 0, 23, 0, 24, 0],
 ];
 
-let playerturn = true; 
-let whiteturn = "White's turn";
-let blackturn = "Black's turn";
+var whiteturn = document.querySelector("#whiteturn");
+var blackturn = document.querySelector("#blackturn");
 let totalblack = 12; 
 let totalwhite = 12; 
 
+let playerturn = true;
+let start = true;
+
+
+if(start)
+{
+ Playerturn();
+ start = false;
+}
+
 function Playerturn()
 {
- 
+  console.log("Innan: " + playerturn);
+ if(playerturn)
+ {
+   whiteturn.style.border = "solid black";
+   blackturn.style.border = "none";
+   playerturn = false;
+   console.log("iftrue");
+ }
+ else 
+ {
+   blackturn.style.border = "solid black";
+   whiteturn.style.border = "none";
+   playerturn = true;
+   console.log("iffalse");
+ }
+ console.log("Efter: " + playerturn);
 }
 
 const white = [
@@ -37,6 +61,7 @@ const white = [
   document.querySelector("#w12")
 ]
 
+
 const black = [
   document.querySelector("#b13"),
   document.querySelector("#b14"),
@@ -54,20 +79,23 @@ const black = [
   document.querySelector("#b24")
 ]
 
-
-
-white[0].addEventListener("click", pieceHovered(white[0]));
+white[0].addEventListener("click", pieceHovered);
 
 
 function pieceHovered()
 {
- 
+  
 } 
 
+function piecePlaced()
+{
 
+}
+
+document.querySelector("#Testknapp").addEventListener("click", Playerturn);
 
 /*
-for(i = 1; i < 12; i++)
+for(i = 0; i < 11; i++)
 {
   = document.querySelector("#" + i);
 }
