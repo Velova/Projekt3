@@ -9,14 +9,19 @@ let gameBoard = [
     [21, 0, 22, 0, 23, 0, 24, 0],
 ];
 
-var whiteturn = document.querySelector("#whiteturn");
-var blackturn = document.querySelector("#blackturn");
+var whiteturnmessage = document.querySelector("#whiteturn");
+var blackturnmessage = document.querySelector("#blackturn");
 let totalblack = 12; 
 let totalwhite = 12; 
 
-let playerturn = true;
+let whitesideturn = true;
 let start = true;
 
+const whitechecker = document.querySelectorAll(".whitechecker");
+const blackchecker = document.querySelectorAll(".blackchecker");
+
+let selectedpiecestring; 
+console.log(whitechecker[0]);
 
 if(start)
 {
@@ -24,72 +29,51 @@ if(start)
  start = false;
 }
 
+
 function Playerturn()
 {
-  console.log("Innan: " + playerturn);
- if(playerturn)
+ if(whitesideturn)
  {
-   whiteturn.style.border = "solid black";
-   blackturn.style.border = "none";
-   playerturn = false;
-   console.log("iftrue");
+   whiteturnmessage.style.border = "solid black";
+   blackturnmessage.style.border = "none";
+   whitesideturn = false;
  }
  else 
  {
-   blackturn.style.border = "solid black";
-   whiteturn.style.border = "none";
-   playerturn = true;
-   console.log("iffalse");
+   blackturnmessage.style.border = "solid black";
+   whiteturnmessage.style.border = "none"; 
+   whitesideturn = true;
  }
- console.log("Efter: " + playerturn);
 }
 
-const white = [
-  document.querySelector("#w1"),
-  document.querySelector("#w2"),
-  document.querySelector("#w3"),
-  document.querySelector("#w4"),
 
-  document.querySelector("#w5"),
-  document.querySelector("#w6"),
-  document.querySelector("#w7"),
-  document.querySelector("#w8"),
-
-  document.querySelector("#w9"),
-  document.querySelector("#w10"),
-  document.querySelector("#w11"),
-  document.querySelector("#w12")
-]
-
-
-const black = [
-  document.querySelector("#b13"),
-  document.querySelector("#b14"),
-  document.querySelector("#b15"),
-  document.querySelector("#b16"),
-
-  document.querySelector("#b17"),
-  document.querySelector("#b18"),
-  document.querySelector("#b19"),
-  document.querySelector("#b20"),
-
-  document.querySelector("#b21"),
-  document.querySelector("#b22"),
-  document.querySelector("#b23"),
-  document.querySelector("#b24")
-]
-
-white[0].addEventListener("click", pieceHovered);
-
-
-function pieceHovered()
+function pieceSelected()
 {
-  
+  if(whitesideturn)
+  {
+   for(let i = 0; i < 11; i++)
+   {
+    whitechecker[i].addEventListener("click", piecePlaced);
+   }
+  }
+  else
+  {
+   for(let i = 0; i < 11; i++)
+   {
+    blackchecker[i].addEventListener("click", piecePlaced);
+   }
+  }
 } 
+
+
+function highlightMoves()
+{
+
+}
 
 function piecePlaced()
 {
-
+ Playerturn();
 }
 
 document.querySelector("#Testknapp").addEventListener("click", Playerturn);
