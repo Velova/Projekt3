@@ -1,14 +1,22 @@
 let gameBoard = [
-    [0, 1, 0, 2, 0, 3, 0, 4],
-    [5, 0, 6, 0, 7, 0, 8, 0],
-    [0, 9, 0, 10, 0, 11, 0, 12],
-    [0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 0, 0, 0, 0, 0, 0, 0],
-    [13, 0, 14, 0, 15, 0, 16, 0],
-    [0, 17, 0, 18, 0, 19, 0, 20],
-    [21, 0, 22, 0, 23, 0, 24, 0],
+    [null, 1, null, 2, null, 3, null, 4],
+    [5, null, 6, null, 7, null, 8, null],
+    [null, 9, null, 10, null, 11, null, 12],
+    [0, null, 0, null, 0, null, 0, null],
+    [null, 0, null, 0, null, 0, null, 0],
+    [13, null, 14, null, 15, null, 16, null],
+    [null, 17, null, 18, null, 19, null, 20],
+    [21, null, 22, null, 23, null, 24, null],
 ];
-
+/*
+for(let x = 0; x < 8; x++)
+{
+  for(let y = 0; y < 8; y++)
+ {
+   console.log(gameBoard[x][y]);
+ }
+}
+*/
 var whiteturnmessage = document.querySelector("#whiteturn");
 var blackturnmessage = document.querySelector("#blackturn");
 let totalblack = 12; 
@@ -20,7 +28,7 @@ let start = true;
 const whitechecker = document.querySelectorAll(".whitechecker");
 const blackchecker = document.querySelectorAll(".blackchecker");
 
-let selectedpiecestring; 
+
 console.log(whitechecker[0]);
 
 if(start)
@@ -46,25 +54,64 @@ function Playerturn()
  }
 }
 
+let selectedPiece = {
+isKing: false,
+xCordinate: null,
+yCordinate: null,
+pieceValue: null
+}
+console.log(selectedPiece);
 
-function pieceSelected()
+function pieceClicked()
 {
-  if(whitesideturn)
+  if(whiteturn = true)
   {
-   for(let i = 0; i < 11; i++)
-   {
-    whitechecker[i].addEventListener("click", piecePlaced);
-   }
+    for(let i = 0; i < whitechecker.length; i++)
+    {
+     whitechecker[i].addEventListener("click", getPlayerPieces);
+    }
   }
   else
   {
-   for(let i = 0; i < 11; i++)
+    for(let i = 0; i < blackchecker.length; i++)
    {
-    blackchecker[i].addEventListener("click", piecePlaced);
+    blackchecker[i].addEventListener("click", getPlayerPieces);
    }
   }
 } 
 
+function getPlayerPieces()
+{
+  if(whitesideturn)
+  {
+   playerPieces = whitechecker;
+  }
+  else
+  {
+   playerPieces = blackchecker;
+  }
+  findPieceOnGameBoard();
+}
+
+console.log("gameboradlength" + gameBoard.length);
+function findPieceOnGameBoard()
+{
+  selectedPiece.pieceValue = parseInt(event.target.id);
+  for(let x = 0; x < gameBoard.length; x++)
+  {
+    for(let y = 0; y < gameBoard.length; y++)
+    {
+     if(gameBoard[x][y] == playerPieces.pieceValue)
+     {
+      selectedPiece.xCordinate = x; 
+      selectedPiece.yCordinate = y;
+      xCordinateSaver = x;
+      yCordinateSaver = y;
+     }
+    }
+  }
+  console.log("???");
+}
 
 function highlightMoves()
 {
@@ -78,9 +125,4 @@ function piecePlaced()
 
 document.querySelector("#Testknapp").addEventListener("click", Playerturn);
 
-/*
-for(i = 0; i < 11; i++)
-{
-  = document.querySelector("#" + i);
-}
-*/
+pieceClicked();
