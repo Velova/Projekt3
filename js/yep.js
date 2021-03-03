@@ -8,15 +8,7 @@ let gameBoard = [
     [null, 17, null, 18, null, 19, null, 20],
     [21, null, 22, null, 23, null, 24, null],
 ];
-/*
-for(let x = 0; x < 8; x++)
-{
-  for(let y = 0; y < 8; y++)
- {
-   console.log(gameBoard[x][y]);
- }
-}
-*/
+
 var whiteturnmessage = document.querySelector("#whiteturn");
 var blackturnmessage = document.querySelector("#blackturn");
 let totalblack = 12; 
@@ -29,14 +21,11 @@ const whitechecker = document.querySelectorAll(".whitechecker");
 const blackchecker = document.querySelectorAll(".blackchecker");
 
 
-console.log(whitechecker[0]);
-
 if(start)
 {
  Playerturn();
  start = false;
 }
-
 
 function Playerturn()
 {
@@ -53,6 +42,7 @@ function Playerturn()
    whitesideturn = true;
  }
 }
+console.log(whitesideturn);
 
 let selectedPiece = {
 isKing: false,
@@ -82,6 +72,7 @@ function pieceClicked()
 
 function getPlayerPieces()
 {
+  console.log("getplayerpieces" + whitesideturn);
   if(whitesideturn)
   {
    playerPieces = whitechecker;
@@ -91,31 +82,46 @@ function getPlayerPieces()
    playerPieces = blackchecker;
   }
   findPieceOnGameBoard();
+  console.log("Yeet");
 }
 
-console.log("gameboradlength" + gameBoard.length);
+let whitemovex1 = 0; 
+let whitemovex2 = 0;
+
 function findPieceOnGameBoard()
 {
-  selectedPiece.pieceValue = parseInt(event.target.id);
+  selectedPiece.pieceValue = parseInt(event.srcElement.id);
+  console.log(selectedPiece.pieceValue);
+  console.log(typeof(selectedPiece.pieceValue));
   for(let x = 0; x < gameBoard.length; x++)
   {
     for(let y = 0; y < gameBoard.length; y++)
     {
-     if(gameBoard[x][y] == playerPieces.pieceValue)
+     if(gameBoard[x][y] == selectedPiece.pieceValue)
      {
       selectedPiece.xCordinate = x; 
       selectedPiece.yCordinate = y;
-      xCordinateSaver = x;
-      yCordinateSaver = y;
      }
-    }
+    }  
   }
   console.log("???");
+  whitemovex1 = selectedPiece.xCordinate + 1;
+  whitemovex2 = selectedPiece.xCordinate - 1;
+  whitemovey = selectedPiece.yCordinate + 1;
+}
+
+function whiteMoveForward()
+{
+  
+}
+
+function blackMoveForward()
+{
+
 }
 
 function highlightMoves()
 {
-
 }
 
 function piecePlaced()
