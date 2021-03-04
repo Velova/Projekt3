@@ -87,6 +87,7 @@ footer {
   border: solid;
   border-radius: 100%;
   background-color: white;
+  border-color: white;
   height: 75%;
   width: 75%;
 }

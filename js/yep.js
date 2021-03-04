@@ -20,12 +20,14 @@ let start = true;
 const whitechecker = document.querySelectorAll(".whitechecker");
 const blackchecker = document.querySelectorAll(".blackchecker");
 
-
-if(start)
+const squares = document.querySelectorAll(".square");
+const blacksquares = document.querySelectorAll(".blacksquare");
+/*
+for(let i = 0; i < squares.length; i++)
 {
- Playerturn();
- start = false;
+ console.log(squares[i]);
 }
+*/
 
 function Playerturn()
 {
@@ -54,7 +56,7 @@ console.log(selectedPiece);
 
 function pieceClicked()
 {
-  if(whiteturn = true)
+  if(whitesideturn)
   {
     for(let i = 0; i < whitechecker.length; i++)
     {
@@ -64,10 +66,12 @@ function pieceClicked()
   else
   {
     for(let i = 0; i < blackchecker.length; i++)
-   {
-    blackchecker[i].addEventListener("click", getPlayerPieces);
-   }
+    {
+     blackchecker[i].addEventListener("click", getPlayerPieces);
+    }
   }
+  
+    
 } 
 
 function getPlayerPieces()
@@ -81,8 +85,15 @@ function getPlayerPieces()
   {
    playerPieces = blackchecker;
   }
+  for(let  i = 0; i < blacksquares.length; i++)
+  {
+    blacksquares[i].style.backgroundColor = "black";
+  }
+  for(let i = 0; i < whitechecker.length; i++)
+  {
+    whitechecker[i].style.borderColor = "white";
+  }
   findPieceOnGameBoard();
-  console.log("Yeet");
 }
 
 let whitemovex1 = 0; 
@@ -93,26 +104,70 @@ function findPieceOnGameBoard()
   selectedPiece.pieceValue = parseInt(event.srcElement.id);
   console.log(selectedPiece.pieceValue);
   console.log(typeof(selectedPiece.pieceValue));
-  for(let x = 0; x < gameBoard.length; x++)
+  for(let y = 0; y < gameBoard.length; y++)
   {
-    for(let y = 0; y < gameBoard.length; y++)
+    for(let x = 0; x < gameBoard.length; x++)
     {
      if(gameBoard[x][y] == selectedPiece.pieceValue)
      {
-      selectedPiece.xCordinate = x; 
-      selectedPiece.yCordinate = y;
+      selectedPiece.xCordinate = y; 
+      selectedPiece.yCordinate = x;
+      // x and y are reverted for some reason so yeah...
+      savexCordinate = y + 1;
+      saveyCordinate = x + 1;
+      //+1 because we'll need to count the squares later
      }
     }  
   }
-  console.log("???");
-  whitemovex1 = selectedPiece.xCordinate + 1;
-  whitemovex2 = selectedPiece.xCordinate - 1;
-  whitemovey = selectedPiece.yCordinate + 1;
+  checkerMoveForward();
 }
 
-function whiteMoveForward()
+function checkerMoveForward()
 {
+  if(whitesideturn)
+  {
+    whitemovex1 = selectedPiece.xCordinate + 1;
+    whitemovex2 = selectedPiece.xCordinate - 1;
+    whitemovey = selectedPiece.yCordinate + 1;
+    /*
+    console.log("whitemovex1: " + whitemovex1);
+    console.log("whitemovex2: " + whitemovex2);
+    console.log("whitemovey: " + whitemovey);
+    console.log("Whitedownright: " + gameBoard[whitemovey][whitemovex1]);
+    console.log("Whitedownleft: " + gameBoard[whitemovey][whitemovex2]);
+    */
+  }
+  else
+  {
+    blackmovex1 = selectedPiece.xCordinate + 1;
+    blackmovex2 = selectedPiece.xCordinate - 1;
+    blackmovey = selectedPiece.yCordinate - 1;
+    console.log("blackmovex1: " + blackmovex1);
+    console.log("blackmovex2: " + blackmovex2);
+    console.log("blackmovey: " + blackmovey);
+    console.log("Blackupright: " + gameBoard[blackmovey][blackmovex1]);
+    console.log("Blackupleft: " + gameBoard[blackmovey][blackmovex2]);
+  }
+  console.log("selectedxCordinate" + selectedPiece.xCordinate);
+  console.log("selectedyCordinate" + selectedPiece.yCordinate);
   
+  checkForLegalMoves();
+  //Playerturn();//Temporary, for testing
+}
+
+function checkForLegalMoves()
+{
+ totalsquaresy = saveyCordinate * 8 - 1;//Count the squares in the previous y rows
+ totalsquaresx1 = savexCordinate - 1;
+ totalsquaresx2 = savexCordinate + 1;
+ totalsquares1 = totalsquaresy + totalsquaresx1;
+ totalsquares2 = totalsquaresy + totalsquaresx2;
+ console.log("totalsquares1: " + totalsquares1 + "Square: " + squares[totalsquares1]);
+ console.log("totalsquares2: " + totalsquares2 + "Square: " + squares[totalsquares2]);
+ console.log("totalsquaresy: " + totalsquaresy);
+ console.log("totalsquaresx1: " + totalsquaresx1);
+ console.log("totalsqauresx2: " + totalsquaresx2); 
+ highlightMoves();
 }
 
 function blackMoveForward()
@@ -122,10 +177,27 @@ function blackMoveForward()
 
 function highlightMoves()
 {
+  whitechecker[selectedPiece.pieceValue - 1].style.borderColor = "orange";
+  
+  if(squares[totalsquares2].classList.contains("whitesquare"))
+  {
+   squares[totalsquares1].style.backgroundColor = "red";
+  }
+  else if(squares[totalsquares1].classList.contains("whitesquare"))
+  {
+    squares[totalsquares2].style.backgroundColor = "red";
+  }
+  else
+  {
+    squares[totalsquares1].style.backgroundColor = "red";
+    squares[totalsquares2].style.backgroundColor = "red";
+  }
+  
 }
 
 function piecePlaced()
 {
+ //whitechecker[selectedPiece.pieceValue - 1].style.display = "none";
  Playerturn();
 }
 
