@@ -10,4 +10,3 @@ Things to make the game work.
 3.  Make the piece a king after reaching the end
 4.  Make the king pieces able to move diagonally forwards and backwards
 5.  Display whose turn it is
-6. 
