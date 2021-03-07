@@ -265,6 +265,10 @@ function highlightMoves()
       squares[totalsquares2 + 9].style.backgroundColor = "#99ff99";
       squares[totalsquares2 + 9].setAttribute("onclick", "piecePlaced(" + (totalsquares2 + 9) + ")");
     }
+    else if(squares[totalsquares1].classList.contains("whitesquare") && gameBoard[selectedPiece.yCordinate + 1][selectedPiece.xCordinate + 1] > 0 && gameBoard[selectedPiece.yCordinate + 1][selectedPiece.xCordinate + 1] < 13)
+    {
+
+    }
     else if(gameBoard[selectedPiece.yCordinate + 1][selectedPiece.xCordinate - 1] > 12 && gameBoard[selectedPiece.yCordinate + 2][selectedPiece.xCordinate - 2] == 0 && gameBoard[selectedPiece.yCordinate + 1][selectedPiece.xCordinate + 1] == 0) // black downleft, nothing downdownleftleft, nothing downright
     {
       squares[totalsquares1 + 7].style.backgroundColor = "#99ff99";
